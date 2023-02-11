@@ -159,5 +159,5 @@ function calcAverageRating(array) {
     total += Number(array[i].grade);
   }
 
-  return total / array.length;
+  return parseFloat(total / array.length).toFixed(2);
 }

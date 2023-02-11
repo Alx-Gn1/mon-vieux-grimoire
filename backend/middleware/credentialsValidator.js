@@ -26,7 +26,9 @@ exports.passwordValidator = (req, res, next) => {
 
   const validate = schema.validate(req.body.password, { details: true });
 
-  if (validate.length === 0) next();
-
-  res.status(400).json({ message: `Erreur : ${validate[0].message}` });
+  if (validate.length === 0) {
+    next();
+  } else {
+    res.status(400).json({ message: `Erreur : ${validate[0].message}` });
+  }
 };

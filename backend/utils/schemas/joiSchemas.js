@@ -11,7 +11,7 @@ exports.bookIdSchema = Joi.object({ id: Joi.string().alphanum() });
 
 exports.bookSchema = Joi.object({
   userId: Joi.string().alphanum(),
-  title: Joi.string().alphanum().max(64).required(),
+  title: Joi.string().max(64).required(),
   author: Joi.string().alphanum().max(32).required(),
   year: Joi.number().integer().required(),
   genre: Joi.string().alphanum().max(32).required(),
