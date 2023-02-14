@@ -1,8 +1,6 @@
 const Book = require("../models/Book");
 const fs = require("fs");
 const { ObjectId } = require("mongodb");
-const { bookIdSchema, bookSchema } = require("../utils/schemas/joiSchemas");
-const Joi = require("joi");
 
 /** GET /api/books
  * Renvoie un tableau de tous les livres de la base de données.
@@ -10,19 +8,24 @@ const Joi = require("joi");
 exports.getAllBooks = (req, res, next) => {
   Book.find()
     .then((books) => res.status(200).json(books))
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => {
+      console.log(error);
+      res.status(400).json({ error: "Une erreur est survenue" });
+    });
 };
 
 /** GET /api/books/:id
  * Renvoie le livre avec l’_id fourni.
  */
 exports.getOneBook = (req, res, next) => {
-  if (!bookIdSchema.validate({ id: req.params.id })) res.status(400).json({ error: "invalid Id" });
   Book.findOne({
     _id: req.params.id,
   })
     .then((book) => res.status(200).json(book))
-    .catch((error) => res.status(404).json({ error }));
+    .catch((error) => {
+      console.log(error);
+      res.status(404).json({ error: "Une erreur est survenue" });
+    });
 };
 /** GET /api/books/bestarting
  * Renvoie un tableau des 3 livres de la base de
@@ -34,7 +37,10 @@ exports.getBestBooks = (req, res, next) => {
       books.sort((book1, book2) => book2.averageRating - book1.averageRating);
       res.status(200).json(books.slice(0, 3));
     })
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => {
+      console.log(error);
+      res.status(400).json({ error: "Une erreur est survenue" });
+    });
 };
 /** POST /api/books
  *   Capture et enregistre l'image, analyse le livre transformé en chaîne de caractères, et l'enregistre
@@ -45,7 +51,6 @@ exports.getBestBooks = (req, res, next) => {
  */
 exports.createBook = (req, res, next) => {
   const bookObj = JSON.parse(req.body.book);
-  if (!bookSchema.validate(bookObj)) res.status(400).json({ error: "invalid book" });
   delete bookObj._id;
   delete bookObj.userId;
   const imageURL = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
@@ -57,7 +62,10 @@ exports.createBook = (req, res, next) => {
   book
     .save()
     .then(() => res.status(201).json({ message: "Le livre a bien été créé" }))
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => {
+      console.log(error);
+      res.status(400).json({ error: "Une erreur est survenue" });
+    });
 };
 /**
  * PUT /api/books/:id
@@ -69,14 +77,12 @@ exports.createBook = (req, res, next) => {
  * il renvoie une chaîne du corps de la demande basée sur les données soumises avec le fichier
  */
 exports.modifyBook = (req, res, next) => {
-  if (!bookIdSchema.validate({ id: req.params.id })) res.status(400).json({ error: "invalid Id" });
   const bookObj = req.file
     ? {
         ...JSON.parse(req.body.book),
         imageURL: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
       }
     : { ...req.body };
-  if (!bookSchema.validate(bookObj)) res.status(400).json({ error: "invalid book" });
   delete bookObj._userId;
   Book.findOne({ _id: req.params.id })
     .then((book) => {
@@ -85,17 +91,22 @@ exports.modifyBook = (req, res, next) => {
       } else {
         Book.updateOne({ _id: req.params.id }, { ...bookObj })
           .then(() => res.status(201).json({ message: "Le livre a été mis à jour" }))
-          .catch((error) => res.status(400).json({ error }));
+          .catch((error) => {
+            console.log(error);
+            res.status(400).json({ error: "Une erreur est survenue" });
+          });
       }
     })
-    .catch((error) => res.status(400).json({ error }));
+    .catch((error) => {
+      console.log(error);
+      res.status(400).json({ error: "Une erreur est survenue" });
+    });
 };
 /**
  * DELETE /api/books/:id
  * Supprime le livre avec l'_id fourni ainsi que l’image associée.
  */
 exports.deleteBook = (req, res, next) => {
-  if (!bookIdSchema.validate({ id: req.params.id })) res.status(400).json({ error: "invalid Id" });
   Book.findOne({ _id: req.params.id })
     .then((book) => {
       if (book.userId != req.auth.userId) {
@@ -107,11 +118,17 @@ exports.deleteBook = (req, res, next) => {
         fs.unlink(`images/${filename}`, () => {
           Book.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: "Le livre a été supprimé" }))
-            .catch((error) => res.status(400).json({ error }));
+            .catch((error) => {
+              console.log(error);
+              res.status(400).json({ error: "Une erreur est survenue" });
+            });
         });
       }
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch((error) => {
+      console.log(error);
+      res.status(400).json({ error: "Une erreur est survenue" });
+    });
 };
 /**
  * POST /api/books/:id/rating
@@ -139,13 +156,19 @@ exports.addRating = (req, res, next) => {
           .then(() => res.status(201).json(newBook))
           .catch((error) => {
             console.log(error);
-            res.status(400).json({ error });
+            {
+              console.log(error);
+              res.status(400).json({ error: "Une erreur est survenue" });
+            }
           });
       }
     })
     .catch((error) => {
       console.log(error);
-      res.status(400).json({ error });
+      {
+        console.log(error);
+        res.status(400).json({ error: "Une erreur est survenue" });
+      }
     });
 };
 

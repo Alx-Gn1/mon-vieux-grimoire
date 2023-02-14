@@ -6,6 +6,11 @@ const MIME_TYPES = {
   "image/png": "png",
 };
 
+/**
+ * config multer, les images vont dans le dossier image,
+ * le nom des fichiers est formatté sans espaces, avec une date pour que 2 fichiers n'aient pas le même nom
+ * et on ajoute l'extension du fichier
+ */
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "images");

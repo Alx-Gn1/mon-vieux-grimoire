@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Fonction pour se connecter à MongoDB avec mongoose, executée au lancement du server
 module.exports = () => {
   mongoose.set("strictQuery", false);
   mongoose
