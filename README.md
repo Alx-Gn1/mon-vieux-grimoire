@@ -13,8 +13,6 @@ Celui ci contient 2 variables :
 
 mongodb+srv://"username":"password"@"cluster".mongodb.net/?retryWrites=true&w=majority
 
-Il manque également le dossier "images" dans le dossier "backend" où sont sauvegardés les fichiers images des livres mis en ligne par les utilisateurs
-
 ## Installation & Lancement
 
 ReactJS :
