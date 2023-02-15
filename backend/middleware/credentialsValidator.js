@@ -3,7 +3,7 @@ const passwordValidator = require("password-validator");
 const Joi = require("joi");
 const credentialsSchema = Joi.object({
   password: Joi.string().alphanum().min(6).max(32).required(),
-  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "org", "fr"] } }),
+  email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "org", "fr"] } }).required(),
 });
 
 /**

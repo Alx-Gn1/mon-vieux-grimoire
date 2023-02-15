@@ -5,6 +5,6 @@ const { emailValidator, passwordValidator } = require("../middleware/credentials
 
 // Routes pour la création de compte et authentification
 router.post("/signup", emailValidator, passwordValidator, userCtrl.signup);
-router.post("/login", emailValidator, userCtrl.login);
+router.post("/login", emailValidator, passwordValidator, userCtrl.login);
 
 module.exports = router;
