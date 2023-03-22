@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:4000';
+const API_URL = 'https://ec2-13-48-137-239.eu-north-1.compute.amazonaws.com';
 export const API_ROUTES = {
   SIGN_UP: `${API_URL}/api/auth/signup`,
   SIGN_IN: `${API_URL}/api/auth/login`,
@@ -6,10 +6,12 @@ export const API_ROUTES = {
   BEST_RATED: `${API_URL}/api/books/bestrating`,
 };
 
+export const BASE_APP_ROUTE = '/mon-vieux-grimoire';
+
 export const APP_ROUTES = {
   SIGN_UP: '/Inscription',
   SIGN_IN: '/Connexion',
   ADD_BOOK: '/Ajouter',
   BOOK: '/livre/:id',
-  UPDATE_BOOK: 'livre/modifier/:id',
+  UPDATE_BOOK: '/livre/modifier/:id',
 };

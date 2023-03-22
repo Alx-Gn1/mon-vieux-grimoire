@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import styles from './BookRatingForm.module.css';
 import { generateStarsInputs, displayStars } from '../../../lib/functions';
-import { APP_ROUTES } from '../../../utils/constants';
+import { APP_ROUTES, BASE_APP_ROUTE } from '../../../utils/constants';
 import { useUser } from '../../../lib/customHooks';
 import { rateBook } from '../../../lib/common';
 
@@ -28,7 +28,7 @@ function BookRatingForm({
   }, [formState]);
   const onSubmit = async () => {
     if (!connectedUser || !auth) {
-      navigate(APP_ROUTES.SIGN_IN);
+      navigate(BASE_APP_ROUTE + APP_ROUTES.SIGN_IN);
     }
     const update = await rateBook(id, userId, rating);
     console.log(update);

@@ -70,7 +70,7 @@ function Book() {
             <div className={styles.Owner}>
               <p>Vous avez publié cet ouvrage, vous pouvez le :</p>
               <p>
-                <Link to={`/livre/modifier/${book.id}`}>modifier</Link>
+                <Link to={`/mon-vieux-grimoire/livre/modifier/${book.id}`}>modifier</Link>
                 {' '}
                 <span tabIndex={0} role="button" onKeyUp={onDelete} onClick={onDelete}>supprimer</span>
                 {' '}
@@ -97,7 +97,7 @@ function Book() {
       <h1>{book.title}</h1>
       <p>a bien été supprimé</p>
       <img src={BookDeleteImage} alt={`Le livre ${book.title} a bien été supprimé`} />
-      <Link to="/">
+      <Link to="/mon-vieux-grimoire">
         <button type="button">{'Retour à l\'accueil'}</button>
       </Link>
     </div>

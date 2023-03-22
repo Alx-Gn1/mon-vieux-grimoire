@@ -4,7 +4,7 @@ import styles from './UpdateBook.module.css';
 import BookForm from '../../components/Books/BookForm/BookForm';
 import BackArrow from '../../components/BackArrow/BackArrow';
 import { getBook } from '../../lib/common';
-import { APP_ROUTES } from '../../utils/constants';
+import { APP_ROUTES, BASE_APP_ROUTE } from '../../utils/constants';
 import { useUser } from '../../lib/customHooks';
 import bookAdd from '../../images/book_add.jpg';
 
@@ -17,7 +17,7 @@ function UpdateBook() {
   useEffect(() => {
     if (!userLoading) {
       if (!connectedUser || !auth) {
-        navigate(APP_ROUTES.SIGN_IN);
+        navigate(BASE_APP_ROUTE + APP_ROUTES.SIGN_IN);
       }
     }
   }, [userLoading]);
@@ -46,7 +46,7 @@ function UpdateBook() {
             <h1>Merci!</h1>
             <p>votre livre a bien été mis à jour</p>
             <img src={bookAdd} alt="Livre mis à jour" />
-            <Link to="/" className="button">Retour à l&apos;accueil</Link>
+            <Link to="/mon-vieux-grimoire" className="button">Retour à l&apos;accueil</Link>
           </div>
         )}
       </div>

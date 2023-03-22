@@ -5,7 +5,7 @@ import {
 import SignIn from './pages/SignIn/SignIn';
 import Home from './pages/Home/Home';
 import Book from './pages/Book/Book';
-import { APP_ROUTES } from './utils/constants';
+import { APP_ROUTES, BASE_APP_ROUTE } from './utils/constants';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import AddBook from './pages/AddBook/AddBook';
@@ -26,11 +26,14 @@ function App() {
         <ScrollToTop />
         <Header user={user} setUser={setUser} />
         <Routes>
-          <Route index element={<Home />} />
-          <Route path={APP_ROUTES.SIGN_IN} element={<SignIn setUser={setUser} />} />
-          <Route path={APP_ROUTES.BOOK} element={<Book />} />
-          <Route path={APP_ROUTES.UPDATE_BOOK} element={<UpdateBook />} />
-          <Route path={APP_ROUTES.ADD_BOOK} element={<AddBook />} />
+          <Route index element={<Home />} path={BASE_APP_ROUTE} />
+          <Route
+            path={BASE_APP_ROUTE + APP_ROUTES.SIGN_IN}
+            element={<SignIn setUser={setUser} />}
+          />
+          <Route path={BASE_APP_ROUTE + APP_ROUTES.BOOK} element={<Book />} />
+          <Route path={BASE_APP_ROUTE + APP_ROUTES.UPDATE_BOOK} element={<UpdateBook />} />
+          <Route path={BASE_APP_ROUTE + APP_ROUTES.ADD_BOOK} element={<AddBook />} />
         </Routes>
         <Footer />
       </div>

@@ -10,7 +10,7 @@ function Header({ user, setUser }) {
   const disconnect = () => {
     localStorage.clear();
     setUser(null);
-    navigate('/');
+    navigate('/mon-vieux-grimoire');
   };
 
   return (
@@ -18,9 +18,9 @@ function Header({ user, setUser }) {
       <div className="container">
         <img src={Logo} alt="logo mpm vieu grimoire" />
         <ul>
-          <li><NavLink to="/" end className={({ isActive }) => (isActive ? styles.activeLink : undefined)}>Accueil</NavLink></li>
-          <li><NavLink to="/Ajouter" className={({ isActive }) => (isActive ? styles.activeLink : undefined)}>Ajouter un livre</NavLink></li>
-          <li>{!user ? <NavLink to="/Connexion" className={({ isActive }) => (isActive ? styles.activeLink : undefined)}>Se connecter</NavLink> : <span tabIndex={0} role="button" onKeyUp={disconnect} onClick={disconnect}>Se déconnecter</span> }</li>
+          <li><NavLink to="/mon-vieux-grimoire" end className={({ isActive }) => (isActive ? styles.activeLink : undefined)}>Accueil</NavLink></li>
+          <li><NavLink to="/mon-vieux-grimoire/Ajouter" className={({ isActive }) => (isActive ? styles.activeLink : undefined)}>Ajouter un livre</NavLink></li>
+          <li>{!user ? <NavLink to="/mon-vieux-grimoire/Connexion" className={({ isActive }) => (isActive ? styles.activeLink : undefined)}>Se connecter</NavLink> : <span tabIndex={0} role="button" onKeyUp={disconnect} onClick={disconnect}>Se déconnecter</span> }</li>
         </ul>
       </div>
     </header>

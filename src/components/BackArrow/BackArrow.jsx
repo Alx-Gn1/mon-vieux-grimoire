@@ -5,7 +5,7 @@ import React from 'react';
 
 function BackArrow() {
   return (
-    <Link to="/" className="backArrow">
+    <Link to="/mon-vieux-grimoire" className="backArrow">
       {' '}
       <FontAwesomeIcon icon={solid('arrow-left')} />
       {' Retour'}

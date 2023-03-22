@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import * as PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { API_ROUTES, APP_ROUTES } from '../../utils/constants';
+import { API_ROUTES, APP_ROUTES, BASE_APP_ROUTE } from '../../utils/constants';
 import { useUser } from '../../lib/customHooks';
 import { storeInLocalStorage } from '../../lib/common';
 import { ReactComponent as Logo } from '../../images/Logo.svg';
@@ -12,7 +12,7 @@ function SignIn({ setUser }) {
   const navigate = useNavigate();
   const { user, authenticated } = useUser();
   if (user || authenticated) {
-    navigate(APP_ROUTES.DASHBOARD);
+    navigate(BASE_APP_ROUTE + APP_ROUTES.DASHBOARD);
   }
 
   const [email, setEmail] = useState('');
@@ -36,7 +36,7 @@ function SignIn({ setUser }) {
       } else {
         storeInLocalStorage(response.data.token, response.data.userId);
         setUser(response.data);
-        navigate('/');
+        navigate('/mon-vieux-grimoire');
       }
     } catch (err) {
       console.log(err);
